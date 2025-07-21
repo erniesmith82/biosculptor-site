@@ -3,11 +3,11 @@
   let menuOpen = false;
   let servicesOpen = false;
   let carouselScroll;
+  let currentSlide = 0;
 
   function scrollLeft(ref) {
     if (!ref) return;
     const cardWidth = ref.querySelector('div')?.offsetWidth || 300;
-
     if (ref.scrollLeft <= 0) {
       ref.scrollTo({ left: ref.scrollWidth, behavior: 'auto' });
     } else {
@@ -19,13 +19,32 @@
     if (!ref) return;
     const cardWidth = ref.querySelector('div')?.offsetWidth || 300;
     const maxScrollLeft = ref.scrollWidth - ref.clientWidth;
-
     if (ref.scrollLeft >= maxScrollLeft - 10) {
       ref.scrollTo({ left: 0, behavior: 'smooth' });
     } else {
       ref.scrollBy({ left: cardWidth, behavior: 'smooth' });
     }
   }
+
+  function scrollToSlide(index) {
+    if (!carouselScroll) return;
+    const cardWidth = carouselScroll.clientWidth;
+    carouselScroll.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
+    currentSlide = index;
+  }
+
+  function updateCurrentSlide() {
+    if (!carouselScroll) return;
+    const cardWidth = carouselScroll.clientWidth;
+    currentSlide = Math.round(carouselScroll.scrollLeft / cardWidth);
+  }
+
+  const slides = [
+    { src: '/vacuumforming-card.jpg', title: 'Vacuum Forming', desc: 'Precision-formed plastics for orthotic applications.' },
+    { src: '/fab.jpg', title: 'Custom Fabrication', desc: 'Made-to-spec designs for clinics and labs.' },
+    { src: '/Ortho.jpg', title: 'Lower Limb Prosthetics', desc: 'Support and stabilization for mobility needs.' },
+    { src: '/hand.jpg', title: 'Upper Limb Prosthetics', desc: 'Functional assistance for hand and arm movement.' },
+  ];
 </script>
 
 <div class="min-h-screen bg-base text-primary font-sans">
@@ -43,7 +62,8 @@
         </button>
       </div>
       <ul class="hidden md:flex space-x-10 text-primary font-medium text-xl items-center relative">
-        <li><a href="#" class="hover:text-accent">Home</a></li>
+        <li><a href="https://kinderband.net/" class="hover:text-accent"><img src="/kinderband-logo_header.png" alt="kinderband logo" class="h-10 sm:h-7 w-auto" /></a></li>
+        <li><a href="https://maramed.com/" class="hover:text-accent"><img src="/maramed-logo.png" alt="maramed logo" class="h-10 sm:h-12 w-auto" /></a></li>
         <li class="relative">
           <button on:click={() => (servicesOpen = !servicesOpen)} class="hover:text-accent flex items-center focus:outline-none">
             Services
@@ -60,13 +80,13 @@
             </ul>
           {/if}
         </li>
-        <li><a href="#" class="hover:text-accent">Pricing</a></li>
-        <li><a href="#" class="hover:text-accent">Contact</a></li>
+        <li><a href="http://noplaster.com/default.aspx" class="hover:text-accent">NoPlaster</a></li>
+        <li><a href="/contact" class="hover:text-accent">Contact</a></li>
       </ul>
     </div>
     {#if menuOpen}
       <ul class="md:hidden px-6 pb-4 space-y-3 text-primary font-medium bg-white border-t border-soft text-lg">
-        <li><a href="#" class="block py-2 hover:text-accent">Home</a></li>
+        <li><a href="https://kinderband.net/" class="block py-2 hover:text-accent">Kinderband™</a></li>
         <li>
           <button on:click={() => (servicesOpen = !servicesOpen)} class="w-full text-left py-2 hover:text-accent flex items-center justify-between">
             Services
@@ -79,7 +99,6 @@
               <li><a href="#" class="block py-1 hover:text-accent">Fabrication</a></li>
               <li><a href="#" class="block py-1 hover:text-accent">Foam Blanks</a></li>
               <li><a href="#" class="block py-1 hover:text-accent">CAD/CAM</a></li>
-              <li><a href="#" class="block py-1 hover:text-accent">Kinderband™</a></li>
             </ul>
           {/if}
         </li>
@@ -90,27 +109,36 @@
   </nav>
 
   <!-- Carousel Section -->
-  <section class="px-4 py-10 bg-white">
+  <section class="px-4 py-10 bg-gray-200">
     <div class="w-full sm:w-[75vw] mx-auto overflow-hidden relative">
-      <button on:click={() => scrollLeft(carouselScroll)} class="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-md rounded-full">◀</button>
-      <div bind:this={carouselScroll} class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto no-scrollbar">
-        {#each [
-          { src: '/vacuumforming-card.jpg', title: 'Vacuum Forming', desc: 'Precision-formed plastics for orthotic applications.' },
-          { src: '/fab.jpg', title: 'Custom Fabrication', desc: 'Made-to-spec designs for clinics and labs.' },
-          { src: '/Ortho.jpg', title: 'Lower Limb Prosthetics', desc: 'Support and stabilization for mobility needs.' },
-          { src: '/hand.jpg', title: 'Upper Limb Prosthetics', desc: 'Functional assistance for hand and arm movement.' },
-        ] as item}
-        <div class="min-w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-soft rounded-lg shadow-md snap-start shrink-0 overflow-hidden relative mx-auto">
-          <img src={item.src} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-r from-black/90 to-transparent"></div>
-          <div class="relative z-10 h-full flex flex-col justify-end p-6 text-white">
-            <h3 class="text-3xl sm:text-6xl font-bold mb-2">{item.title}</h3>
-            <p>{item.desc}</p>
+      <button on:click={() => scrollLeft(carouselScroll)} class="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 shadow-md text-white">◀</button>
+      <div
+        bind:this={carouselScroll}
+        class="flex snap-x snap-mandatory scroll-smooth  overflow-x-auto no-scrollbar"
+        on:scroll={updateCurrentSlide}
+      >
+        {#each slides as item, i}
+          <div class="min-w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-soft rounded-lg shadow-md snap-start shrink-0 overflow-hidden relative mx-auto">
+            <img src={item.src} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 to-transparent"></div>
+            <div class="relative z-10 h-full flex flex-col justify-end p-6 text-white">
+              <h3 class="text-3xl sm:text-6xl font-bold mb-2">{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
           </div>
-        </div>
         {/each}
       </div>
-      <button on:click={() => scrollRight(carouselScroll)} class="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-md rounded-full">▶</button>
+      <button on:click={() => scrollRight(carouselScroll)} class="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 shadow-md text-white ">▶</button>
+
+      <!-- Pagination Dots -->
+      <div class="flex justify-center mt-4 space-x-2">
+        {#each slides as _, index}
+          <button
+            class={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-accent' : 'bg-soft'} transition`}
+            on:click={() => scrollToSlide(index)}
+          />
+        {/each}
+      </div>
     </div>
   </section>
 
