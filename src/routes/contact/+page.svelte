@@ -18,7 +18,7 @@
     <!-- Contact Info & Form -->
     <div class="p-6 sm:p-10">
       <h1 class="text-3xl font-bold mb-2 text-deep">Contact Us</h1>
-      <p class="text-soft mb-6">Reach out to us for inquiries, support, or feedback. We're here to help.</p>
+      <p class="text-hard mb-6">Reach out to us for inquiries, support, or feedback. We're here to help.</p>
 
       <div class="space-y-6">
         <!-- Contact Info -->
@@ -27,21 +27,21 @@
             <span class="text-xl">📧</span>
             <div>
               <h3 class="font-semibold text-lg">Email</h3>
-              <p class="text-soft">info@biosculptor.com</p>
+              <p class="text-hard">info@biosculptor.com</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="text-xl">📞</span>
             <div>
               <h3 class="font-semibold text-lg">Phone</h3>
-              <p class="text-soft">+1 (555) 123-4567</p>
+              <p class="text-hard">(305) 823-8300</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="text-xl">📍</span>
             <div>
               <h3 class="font-semibold text-lg">Address</h3>
-              <p class="text-soft">128 Example St, Miami, FL 33101</p>
+              <p class="text-hard">2480 W 82nd St #8, Hialeah, FL 33016</p>
             </div>
           </div>
         </div>
