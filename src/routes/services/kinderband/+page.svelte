@@ -7,16 +7,17 @@
 
     <!-- Hero / Overview -->
 <div class="text-center relative w-full my-10 overflow-hidden">
-  <!-- Background image full width -->
+ <div class="relative w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] overflow-hidden">
+  <!-- Background image -->
   <img
     src="/greenBG.png"
     alt="background"
-    class="absolute inset-0 w-full h-full object-cover opacity-60 z-0 pointer-events-none"
-/>
+    class="absolute inset-0 w-full h-full object-cover opacity-60 z-0 animate-scroll"
+  />
 
-  <!-- Foreground content stacked above background -->
-  <div class="relative z-10 max-w-4xl mx-auto px-4">
-    <h1 class="text-5xl sm:text-5xl font-bold mb-4 text-green-600">
+  <!-- Foreground content -->
+  <div class="relative z-10 max-w-4xl mx-auto text-center px-4 py-12 sm:py-16">
+    <h1 class="text-4xl sm:text-5xl font-bold text-green-600 mb-4">
       kinderBAND™ Cranial Remodeling System
     </h1>
 
@@ -32,6 +33,7 @@
     </p>
   </div>
 </div>
+
 
 
     <!-- Treatment Process Steps -->
@@ -74,7 +76,7 @@
     <div class="text-center mt-12">
       <a 
   href="https://kinderband.net/" 
-  class="inline-block bg-green-600 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition"
+  class="inline-block bg-green-400 hover:bg-green-500 text-white px-6 py-3 rounded-lg transition"
 >
   Learn More or Locate a Clinic
 </a>

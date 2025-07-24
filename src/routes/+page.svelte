@@ -1,22 +1,20 @@
 <script>
+  import { onMount } from 'svelte';
+
   let carouselScroll;
   let currentSlide = 0;
 
   const slides = [
-    { src: '/vacuumforming-card.jpg', title: 'Vacuum Forming', desc: 'Precision-formed plastics for orthotic applications.' },
-    { src: '/fab.jpg', title: 'Custom Fabrication', desc: 'Made-to-spec designs for clinics and labs.' },
-    { src: '/Ortho.jpg', title: 'Lower Limb Prosthetics', desc: 'Support and stabilization for mobility needs.' },
-    { src: '/hand.jpg', title: 'Upper Limb Prosthetics', desc: 'Functional assistance for hand and arm movement.' },
+    { src: '/thermoforming.png', title: 'Thermoforming', desc: 'Precision-formed plastics for orthotic applications.' },
+    { src: '/fab.jpg', title: 'Central Fabrication', desc: 'Made-to-spec designs for clinics and labs.' },
+    { src: '/Prototyping.png', title: 'Prototyping and Custom Fabrications', desc: 'Precision prototyping with 3D printing, milling, and forming.' },
+    { src: '/kinderband02.png', title: 'kinderBAND™ Cranial Remodeling System', desc: 'Precise, gentle, and effective care for infants.' },
   ];
 
   function scrollLeft(ref) {
     if (!ref) return;
     const cardWidth = ref.querySelector('div')?.offsetWidth || 300;
-    if (ref.scrollLeft <= 0) {
-      ref.scrollTo({ left: ref.scrollWidth, behavior: 'auto' });
-    } else {
-      ref.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-    }
+    ref.scrollBy({ left: -cardWidth, behavior: 'smooth' });
   }
 
   function scrollRight(ref) {
@@ -25,8 +23,10 @@
     const maxScrollLeft = ref.scrollWidth - ref.clientWidth;
     if (ref.scrollLeft >= maxScrollLeft - 10) {
       ref.scrollTo({ left: 0, behavior: 'smooth' });
+      currentSlide = 0;
     } else {
       ref.scrollBy({ left: cardWidth, behavior: 'smooth' });
+      currentSlide = Math.min(currentSlide + 1, slides.length - 1);
     }
   }
 
@@ -42,12 +42,24 @@
     const cardWidth = carouselScroll.clientWidth;
     currentSlide = Math.round(carouselScroll.scrollLeft / cardWidth);
   }
+
+  // Autoplay every 5 seconds
+  onMount(() => {
+    const interval = setInterval(() => {
+      scrollRight(carouselScroll);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  });
 </script>
 
 <!-- Carousel Section -->
 <section class="px-4 py-10 bg-gray-200">
   <div class="w-full sm:w-[75vw] mx-auto overflow-hidden relative">
+    <!-- Left Arrow -->
     <button on:click={() => scrollLeft(carouselScroll)} class="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 shadow-md text-white">◀</button>
+
+    <!-- Slide Container -->
     <div
       bind:this={carouselScroll}
       class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto no-scrollbar"
@@ -55,15 +67,17 @@
     >
       {#each slides as item, i}
         <div class="min-w-full h-[400px] sm:h-[500px] lg:h-[600px] bg-soft rounded-lg shadow-md snap-start shrink-0 overflow-hidden relative mx-auto">
-          <img src={item.src} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-r from-black/90 to-transparent"></div>
-          <div class="relative z-10 h-full flex flex-col justify-end p-6 text-white">
-            <h3 class="text-3xl sm:text-6xl font-bold mb-2">{item.title}</h3>
-            <p>{item.desc}</p>
-          </div>
-        </div>
+  <img src={item.src} alt={item.title} class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-gradient-to-r from-black/90 to-transparent"></div>
+  <div class="relative z-10 h-full flex flex-col justify-end p-4 sm:p-6 text-white">
+    <h3 class="text-base sm:text-2xl lg:text-4xl font-bold mb-2 leading-snug break-words">{item.title}</h3>
+    <p class="text-sm sm:text-base lg:text-lg">{item.desc}</p>
+  </div>
+</div>
       {/each}
     </div>
+
+    <!-- Right Arrow -->
     <button on:click={() => scrollRight(carouselScroll)} class="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 shadow-md text-white">▶</button>
 
     <!-- Pagination Dots -->
@@ -77,6 +91,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Hero Section -->
 <section class="bg-white text-center py-16 px-4">
@@ -94,7 +109,7 @@
     <p class="text-lg text-primary mb-8">Decades of experience, precision technology, and a team dedicated to mobility solutions.</p>
     <div class="grid md:grid-cols-3 gap-8">
       <div>
-        <h3 class="text-xl font-semibold text-accent mb-2">Custom Fabrication</h3>
+        <h3 class="text-xl font-semibold text-accent mb-2">Central Fabrication</h3>
         <p>Precision-fit orthotics and prosthetics tailored to each patient’s needs.</p>
       </div>
       <div>

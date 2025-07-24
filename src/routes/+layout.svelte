@@ -6,19 +6,23 @@
 
 <div class="min-h-screen flex flex-col bg-base text-primary font-sans">
   <!-- Navbar -->
-  <nav class="bg-white border-b border-soft sticky top-0 z-50 shadow-sm">
+  <nav class="bg-deep border-b border-soft sticky top-0 z-50 shadow-sm">
     <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 h-16 sm:h-20">
       <div class="flex items-center">
         <a href="/">
-  <img src="/BiosculptorLogo.png" alt="BioSculptor Logo" class="h-12 sm:h-20 w-auto" />
+  <img src="/BiosculptorLogoDark.png" alt="BioSculptor Logo" class="h-32 sm:h-40 w-auto" />
 </a>
       </div>
       <div class="md:hidden">
-        <button on:click={() => (menuOpen = !menuOpen)} class="text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent rounded p-1">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <button 
+  on:click={() => (menuOpen = !menuOpen)} 
+  class="text-orange-500 hover:text-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded p-1"
+>
+  <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
       </div>
       <ul class="hidden md:flex space-x-10 text-primary font-medium text-xl items-center relative">
         <li>
@@ -32,7 +36,7 @@
           </a>
         </li>
         <li class="relative">
-          <button on:click={() => (servicesOpen = !servicesOpen)} class="hover:text-accent flex items-center focus:outline-none">
+          <button on:click={() => (servicesOpen = !servicesOpen)} class="text-white hover:text-accent flex items-center focus:outline-none">
             Services
             <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -47,8 +51,8 @@
             </ul>
           {/if}
         </li>
-        <li><a href="http://noplaster.com/default.aspx" class="hover:text-accent">NoPlaster</a></li>
-        <li><a href="/contact" class="hover:text-accent">Contact</a></li>
+        <li><a href="http://noplaster.com/default.aspx" class="text-white hover:text-accent">NoPlaster</a></li>
+        <li><a href="/contact" class="text-white hover:text-accent">Contact</a></li>
       </ul>
     </div>
 
@@ -89,8 +93,7 @@
       <div class="md:flex md:justify-between">
         <div class="mb-6 md:mb-0">
           <a href="/" class="flex items-center">
-            <img src="/BiosculptorLogo.png" class="h-8 me-3" alt="BioSculptor Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap">BioSculptor</span>
+            <img src="/BiosculptorLogoDark.png" class="h-32 sm:h-36 me-3" alt="BioSculptor Logo" />
           </a>
         </div>
         <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

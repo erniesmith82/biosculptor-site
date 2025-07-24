@@ -16,7 +16,7 @@ export default {
       },
       animation: {
         scroll: 'scroll 180s linear infinite',
-        carousel: 'carousel 180s ease-in-out infinite',
+        carousel: 'carousel 30s ease-in-out infinite',
       },
       keyframes: {
         scroll: {
@@ -35,3 +35,4 @@ export default {
   },
   plugins: []
 }
+
