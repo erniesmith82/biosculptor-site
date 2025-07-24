@@ -22,7 +22,7 @@
       </div>
       <ul class="hidden md:flex space-x-10 text-primary font-medium text-xl items-center relative">
         <li>
-          <a href="https://kinderband.net/" class="hover:text-accent">
+          <a href="/services/kinderband" class="hover:text-accent">
             <img src="/kinderband-logo_header.png" alt="kinderband logo" class="h-7 sm:h-8 w-auto" />
           </a>
         </li>
@@ -54,7 +54,7 @@
 
     {#if menuOpen}
       <ul class="md:hidden px-6 pb-4 space-y-3 text-primary font-medium bg-white border-t border-soft text-lg">
-        <li><a href="https://kinderband.net/" class="block py-2 hover:text-accent">Kinderband™</a></li>
+        <li><a href="/services/kinderband" class="block py-2 hover:text-accent">Kinderband™</a></li>
         <li><a href="https://maramed.com/" class="block py-2 hover:text-accent">Maramed™</a></li>
         <li>
           <button on:click={() => (servicesOpen = !servicesOpen)} class="w-full text-left py-2 hover:text-accent flex items-center justify-between">
