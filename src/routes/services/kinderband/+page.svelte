@@ -9,11 +9,11 @@
 <div class="text-center relative w-full my-10 overflow-hidden">
  <div class="relative w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] overflow-hidden">
   <!-- Background image -->
-  <img
-    src="/greenBG.png"
-    alt="background"
-    class="absolute inset-0 w-full h-full object-cover opacity-60 z-0 animate-scroll"
-  />
+ <img
+  src="/greenBG.png"
+  alt="background"
+  class="absolute inset-0 w-full h-full object-cover z-0 animate-fade-in"
+/>
 
   <!-- Foreground content -->
   <div class="relative z-10 max-w-4xl mx-auto text-center px-4 py-12 sm:py-16">
@@ -21,12 +21,11 @@
       kinderBAND™ Cranial Remodeling System
     </h1>
 
-    <img
-      src="/baby_header-1.png"
-      alt="kinderband logo"
-      class="mx-auto h-64 sm:h-80 lg:h-[28rem] w-auto drop-shadow-xl my-6"
-    />
-
+   <img
+  src="/baby_header-1.png"
+  alt="kinderband logo"
+  class="mx-auto h-64 sm:h-80 lg:h-[28rem] w-auto drop-shadow-xl my-6 opacity-0 animate-slide-in-right"
+/>
     <p class="text-lg text-gray-700">
       Expert-guided helmet therapy for infants to correct head shape using FDA-cleared
       BioScanner™ scanning and trusted clinical methods.

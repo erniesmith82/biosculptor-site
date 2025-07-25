@@ -14,3 +14,26 @@
 .animate-waveScroll {
   animation: waveScroll 30s linear infinite;
 }
+ @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.6; } /* match your original opacity */
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 2s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1.5s ease-out forwards;
+}
